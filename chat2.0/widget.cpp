@@ -7,8 +7,6 @@
 #include<QDateTime>
 #include<QNetworkInterface>
 #include<QProcess>
-#include <QFileDialog>
-#include <stdio.h>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -21,8 +19,6 @@ Widget::Widget(QWidget *parent) :
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));//每当有数据到来时就会触发processPendingDatagrams()这个槽
     connect(this->ui->sendButton,SIGNAL(clicked(bool)),this,SLOT(send()));
     connect(this->ui->exitButton,SIGNAL(clicked(bool)),this,SLOT(cancel()));
-    connect(this->ui->saveToolBtn,SIGNAL(clicked(bool)),this,SLOT(toolButton()));
-
     sendMessage(NewParticipant);
     //以上创建了UDP套接字并进行初始化。sendmessage来广播用户登录信息，并且其函数用来发送各种UDP数据
 }
@@ -83,7 +79,7 @@ void Widget::processPendingDatagrams()
         {
             case Message://普通法聊天消息的操作
                 in>>userName>>localHostName>>ipAddress>>message;//依次获取用户名，主机名，IP地址和消息
-                ui->messageBrowser->setTextColor(Qt::red);
+                ui->messageBrowser->setTextColor(Qt::blue);
                 ui->messageBrowser->setCurrentFont(QFont("Times New Roman"));
                 ui->messageBrowser->append("["+userName+"]"+time);//显示用户名和发消息的时间在左上角的信息浏览器中
                 ui->messageBrowser->append(message);//显示所发的消息在左上角的信息浏览器中
@@ -180,37 +176,6 @@ QString Widget::getMessage()//获取用户输入的消息
     ui->messageTextEdit->clear();//然后清空编辑区
     ui->messageTextEdit->setFocus();
     return msg;
-}
-
-void Widget::toolButton()
-{
-    if(ui->messageBrowser->document()->isEmpty())
-    {
-        QMessageBox::warning(0,tr("警告"),
-                             tr("聊天记录为空，无法保存！"),QMessageBox::Ok);
-    }
-    else
-    {
-        QString fileName = QFileDialog::getSaveFileName(this,
-        tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
-
-        if(!QString (fileName).isEmpty())
-            saveFile(fileName);
-     }
-}
-
-bool Widget::saveFile(const QString&fileName)
-{
-    QFile file(fileName);
-    if(!file.open(QFile::WriteOnly|QFile::Text))
-    {
-        QMessageBox::warning(this,tr("保存文件"),
-           tr("无法保存文件%1:\n%2").arg(fileName).arg(file.errorString()));
-        return false;
-    }
-    QTextStream out(&file);
-    out<<ui->messageBrowser->toPlainText();
-    return true;
 }
 
 void Widget::send()

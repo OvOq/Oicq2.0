@@ -9,7 +9,7 @@ QT       +=network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = chat
+TARGET = chat22
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -36,4 +36,5 @@ FORMS += \
 
 RESOURCES += \
     test.qrc \
-    chaticon/test.qrc
+    chat22icon.qrc \
+    222icon.qrc

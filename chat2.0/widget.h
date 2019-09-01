@@ -31,8 +31,6 @@ protected:
     QString getUserName();//获取用户名函数的声明
     QString getMessage();//获取新消息的函数的声明
 
-    bool saveFile(const QString&fileName);
-
 private:
     Ui::Widget *ui;
     QUdpSocket *udpSocket;
@@ -42,7 +40,6 @@ private slots:
     void processPendingDatagrams();//槽函数声明
     void send();//点击发送的槽函数
     void cancel();//点击退出的槽函数
-    void toolButton();
 };
 
 
