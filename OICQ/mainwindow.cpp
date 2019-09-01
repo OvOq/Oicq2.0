@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //stack window init
     mainpagewidget = new MainPageinStack;
     friendpage = new friendwidget;
-    chatpage = new ChatWidget;
+    chatpage = new Widget;
 
     ui->StackWidget->addWidget(mainpagewidget);
     ui->StackWidget->addWidget(friendpage);

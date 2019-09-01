@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "checklogininput.h"
+#include "widget.h"
 
 int main(int argc, char *argv[])
 {
