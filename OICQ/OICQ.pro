@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,21 +30,21 @@ SOURCES += \
     checklogininput.cpp \
     mainpageinstack.cpp \
     friendwidget.cpp \
-    chatwidget.cpp
+    widget.cpp
 
 HEADERS += \
         mainwindow.h \
     checklogininput.h \
     mainpageinstack.h \
     friendwidget.h \
-    chatwidget.h
+    widget.h
 
 FORMS += \
         mainwindow.ui \
     checklogininput.ui \
     mainpageinstack.ui \
     friendwidget.ui \
-    chatwidget.ui
+    widget.ui
 
 RESOURCES += \
     image.qrc \

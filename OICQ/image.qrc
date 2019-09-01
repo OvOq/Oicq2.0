@@ -9,6 +9,13 @@
         <file>image/logIn.png</file>
         <file>image/in.png</file>
         <file>image/icon.ico</file>
+        <file>image/underline.png</file>
+        <file>image/text_color.png</file>
+        <file>image/send.png</file>
+        <file>image/save.png</file>
+        <file>image/italic.png</file>
+        <file>image/clear.png</file>
+        <file>image/bold.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

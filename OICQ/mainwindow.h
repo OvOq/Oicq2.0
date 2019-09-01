@@ -11,7 +11,7 @@
 #include <mainpageinstack.h>
 #include "checklogininput.h"
 #include "friendwidget.h"
-#include "chatwidget.h"
+#include "widget.h"
 
 namespace Ui {
 class MainWindow;
@@ -39,7 +39,7 @@ private:
     // stack window init
     MainPageinStack *mainpagewidget;
     friendwidget *friendpage;
-    ChatWidget *chatpage;
+    Widget *chatpage;
 
     // log out and back to login window
     CheckLoginInput *log_i;

@@ -42,7 +42,7 @@
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(54, 54, 54);</string>
+    <string notr="true">background-color: rgb(46, 52, 54);</string>
    </property>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
@@ -56,6 +56,9 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QStackedWidget" name="StackWidget">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(79,79,79);</string>
+       </property>
        <widget class="QWidget" name="mainpage">
         <widget class="QLabel" name="label">
          <property name="geometry">
@@ -97,6 +100,9 @@
         </widget>
        </widget>
        <widget class="QWidget" name="chatpage">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(110, 149, 237);</string>
+        </property>
         <widget class="QLabel" name="label_3">
          <property name="geometry">
           <rect>
@@ -111,6 +117,9 @@
            <pointsize>50</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="text">
           <string>       chat</string>
          </property>
@@ -120,200 +129,165 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="gridLayoutWidget_2">
+   <widget class="QToolButton" name="toolButton">
     <property name="geometry">
      <rect>
-      <x>1129</x>
-      <y>0</y>
-      <width>171</width>
-      <height>851</height>
+      <x>1254</x>
+      <y>1</y>
+      <width>19</width>
+      <height>19</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="1">
-      <widget class="QToolButton" name="toolButton">
-       <property name="styleSheet">
-        <string notr="true">border-radius:100px;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/mini.png</normaloff>:/new/prefix1/image/mini.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="2">
-      <widget class="QToolButton" name="toolButton_2">
-       <property name="styleSheet">
-        <string notr="true">border-radius:100px;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/close.png</normaloff>:/new/prefix1/image/close.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="4" column="2">
-      <spacer name="verticalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="3" column="2">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="0">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="1" column="0">
-      <widget class="QToolButton" name="toolButton_3">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(108, 123, 139);
+    <property name="styleSheet">
+     <string notr="true">border-radius:100px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="image_index.qrc">
+      <normaloff>:/new/prefix1/image/mini.png</normaloff>:/new/prefix1/image/mini.png</iconset>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_2">
+    <property name="geometry">
+     <rect>
+      <x>1279</x>
+      <y>1</y>
+      <width>19</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:100px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="image_index.qrc">
+      <normaloff>:/new/prefix1/image/close.png</normaloff>:/new/prefix1/image/close.png</iconset>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_3">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>80</y>
+      <width>98</width>
+      <height>92</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(108, 123, 139);
 border-radius:10px;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/main.png</normaloff>:/new/prefix1/image/main.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>85</width>
-         <height>85</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QToolButton" name="toolButton_4">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(108, 123, 139);
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="image_index.qrc">
+      <normaloff>:/new/prefix1/image/main.png</normaloff>:/new/prefix1/image/main.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>95</width>
+      <height>89</height>
+     </size>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="autoExclusive">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_4">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>280</y>
+      <width>98</width>
+      <height>92</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(108, 123, 139);
 border-radius:10px;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/friend.png</normaloff>:/new/prefix1/image/friend.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>85</width>
-         <height>85</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QToolButton" name="toolButton_5">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(108, 123, 139);
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="image_index.qrc">
+      <normaloff>:/new/prefix1/image/friend.png</normaloff>:/new/prefix1/image/friend.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>95</width>
+      <height>89</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_5">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>490</y>
+      <width>98</width>
+      <height>92</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(108, 123, 139);
 border-radius:10px;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/chat.png</normaloff>:/new/prefix1/image/chat.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>85</width>
-         <height>85</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QToolButton" name="toolButton_6">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(108, 123, 139);
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="image_index.qrc">
+      <normaloff>:/new/prefix1/image/chat.png</normaloff>:/new/prefix1/image/chat.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>95</width>
+      <height>89</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_6">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>700</y>
+      <width>98</width>
+      <height>92</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(108, 123, 139);
 border-radius:10px;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/out.png</normaloff>:/new/prefix1/image/out.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>85</width>
-         <height>85</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="image_index.qrc">
+      <normaloff>:/new/prefix1/image/out.png</normaloff>:/new/prefix1/image/out.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>95</width>
+      <height>89</height>
+     </size>
+    </property>
    </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="image.qrc"/>
+  <include location="image_index.qrc"/>
  </resources>
  <connections/>
 </ui>
