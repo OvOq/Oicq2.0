@@ -9,6 +9,7 @@
 #include <QProcess>
 #include <QFileDialog>
 #include <stdio.h>
+#include <QColorDialog>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -55,4 +56,51 @@ bool Widget::saveFile(const QString&fileName)
     QTextStream out(&file);
     out<<ui->messageBrowser->toPlainText();
     return true;
+}
+//更改字体族
+void Widget::on_fontComboBox_currentFontChanged(const QFont &f)
+{
+    ui->messageTextEdit->setCurrentFont(f);
+    ui->messageTextEdit->setFocus();
+}
+//更改字体大小
+void Widget::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+   ui->messageTextEdit->setFontPointSize(size.toDouble());
+   ui->messageTextEdit->setFocus();
+}
+//设置字体加粗、倾斜、下划线和颜色
+
+
+
+//加粗
+void Widget::on_boldToolBtn_clicked(bool checked)
+{
+    if(checked)
+        ui->messageTextEdit->setFontWeight(QFont::bold);
+    else
+        ui->messageTextEdit->setFontWeight(QFont::Normal);
+    ui->messageTextEdit->setFocus;
+}
+
+//倾斜
+void Widget::on_italicToolBtn_clicked(bool checked)
+{
+    ui->messageTextEdit->setFontItalic(checked);
+    ui->messageTextEdit->setFocus();
+}
+//下划线
+void Widget::on_underlineToolBtn_clicked(bool checked)
+{
+    ui->messageTextEdit->setFontUnderline(checked);
+    ui->messageTextEdit->setFocus();
+}
+//颜色
+void Widget::on_colorToolBtn_clicked()
+{
+    color=QColorDialog::getColor(color,this);
+    if(color.isValid())
+    {
+        ui->messageTextEdit->setTextColor(color);
+        ui->messageTextEdit->setFocus();
 }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>450</height>
+    <height>593</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,14 +26,194 @@
   <widget class="QToolButton" name="saveToolBtn">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>690</x>
      <y>300</y>
-     <width>121</width>
-     <height>41</height>
+     <width>30</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>保存聊天记录</string>
    </property>
    <property name="text">
     <string>保存</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QFontComboBox" name="fontComboBox">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>300</y>
+     <width>211</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>300</y>
+     <width>87</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="boldToolBtn">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>300</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>加粗</string>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="italicToolBtn">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>300</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>倾斜</string>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="underlineToolBtn">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>300</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>下划线</string>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="colorToolBtn">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>300</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>更改字体颜色</string>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="sendToolBtn">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>300</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>传输文件</string>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="clearToolBtn">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>300</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>清空聊天记录</string>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="messageTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>330</y>
+     <width>501</width>
+     <height>141</height>
+    </rect>
    </property>
   </widget>
  </widget>

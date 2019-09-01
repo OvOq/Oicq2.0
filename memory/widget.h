@@ -29,10 +29,17 @@ private:
     Ui::Widget *ui;
     QUdpSocket *udpSocket;
     qint16 port;
+    QColor color;
 
 private  slots:
     void processPendingDatagrams();
     void toolButton();
+    void on_fontComboBox_currentFontChanged(const QFont &f);
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_boldToolBtn_clicked(bool checked);
+    void on_italicToolBtn_clicked(bool checked);
+    void on_underlineToolBtn_clicked(bool checked);
+    void on_colorToolBtn_clicked();
 };
 
 #endif // WIDGET_H
