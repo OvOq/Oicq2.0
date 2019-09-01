@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(46, 52, 54);</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -101,6 +104,10 @@
       <property name="text">
        <string>登录</string>
       </property>
+      <property name="icon">
+       <iconset resource="image.qrc">
+        <normaloff>:/new/prefix1/image/in.png</normaloff>:/new/prefix1/image/in.png</iconset>
+      </property>
      </widget>
     </item>
     <item>
@@ -126,6 +133,10 @@
       </property>
       <property name="text">
        <string>注册</string>
+      </property>
+      <property name="icon">
+       <iconset resource="image.qrc">
+        <normaloff>:/new/prefix1/image/logIn.png</normaloff>:/new/prefix1/image/logIn.png</iconset>
       </property>
      </widget>
     </item>
@@ -153,12 +164,18 @@
       <property name="text">
        <string>退出</string>
       </property>
+      <property name="icon">
+       <iconset resource="image.qrc">
+        <normaloff>:/new/prefix1/image/out.png</normaloff>:/new/prefix1/image/out.png</iconset>
+      </property>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>exitBtn</sender>

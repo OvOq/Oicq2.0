@@ -7,6 +7,8 @@ CheckLoginInput::CheckLoginInput(QWidget *parent) :
     ui(new Ui::CheckLoginInput)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/new/prefix1/image/icon.ico"));
+    this->setWindowTitle("Welcome to Oicq2.0");
 }
 
 CheckLoginInput::~CheckLoginInput()
@@ -16,7 +18,7 @@ CheckLoginInput::~CheckLoginInput()
 
 void CheckLoginInput::on_loginBtn_clicked()
 {
-    // 判断用户名和密码是否正确，
+    // 判断用户名和密码是否正确
     // 如果错误则弹出警告对话框
     if (ui->usrLineEdit->text().trimmed() == tr("zh") && ui->pwdLineEdit->text() == tr("123456"))//暂时先用zh,123456账号
     {

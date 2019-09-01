@@ -26,12 +26,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    checklogininput.cpp
+    checklogininput.cpp \
+    mainpageinstack.cpp \
+    friendwidget.cpp \
+    chatwidget.cpp
 
 HEADERS += \
         mainwindow.h \
-    checklogininput.h
+    checklogininput.h \
+    mainpageinstack.h \
+    friendwidget.h \
+    chatwidget.h
 
 FORMS += \
         mainwindow.ui \
-    checklogininput.ui
+    checklogininput.ui \
+    mainpageinstack.ui \
+    friendwidget.ui \
+    chatwidget.ui
+
+RESOURCES += \
+    image.qrc \
+    image_index.qrc
+
+DISTFILES +=
