@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <stdio.h>
 #include <QColorDialog>
+#include <QTextCharFormat> // 2019/9/2
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -21,6 +22,8 @@ Widget::Widget(QWidget *parent) :
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));
     connect(ui->saveToolBtn,SIGNAL(clicked(bool)),this,SLOT(toolButton()));
     //sendMessage(NewParticipant);
+    connect(ui->messageTextEdit,SIGNAL(currentCharFormatChanged(QTextCharFormat)),
+            this,SLOT(currentFormatChanged(const QTextCharFormat))//2019/9/2
 }
 
 Widget::~Widget()
@@ -103,9 +106,9 @@ void Widget::on_colorToolBtn_clicked()
     {
         ui->messageTextEdit->setTextColor(color);
         ui->messageTextEdit->setFocus();
+    }
 }
-}
-//清空聊天记录
+//清空聊天记录  2019/9/2
 void Widget::on_clearToolBtn_clicked()
 {
     ui->messageBrowser->clear();
@@ -120,4 +123,23 @@ void Widget::closeEvent(QCloseEvent*e)
 {
     sendMessage(ParticipantLeft);
     QWidget::closeEvent(e);
+}
+//多种字体
+void Widget::currentFormatChanged(const QTextCharFormat &format)
+{
+    ui->fontComboBox->setCurrentFont(format.font());
+    if(format.fontPointSize()<9)
+    {
+       ui->sizeComboBox->setCurrentIndex(3);
+    }
+    else
+   {
+        ui->sizeComboBox->setCurrentIndex(ui->sizeComboBox
+            ->findText(QString::number(format.fontPointSize())));
+   }
+   ui->boldToolBtn->setChecked(format.font().bold());
+   ui->italicToolBtn->setChecked(format.font().italic());
+   ui->underlineToolBtn->setChecked(format.font().underline());
+   color=format.foreground().color;
+
 }
