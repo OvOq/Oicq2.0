@@ -15,7 +15,7 @@ public:
     explicit friendwidget(QWidget *parent = 0);
     ~friendwidget();
 
-private:
+//private:
     Ui::friendwidget *ui;
 };
 

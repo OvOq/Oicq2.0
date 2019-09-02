@@ -91,6 +91,7 @@ public:
         icon2.addFile(QStringLiteral(":/new/prefix1/image/underline.png"), QSize(), QIcon::Normal, QIcon::Off);
         underlineToolBtn->setIcon(icon2);
         underlineToolBtn->setIconSize(QSize(22, 22));
+        underlineToolBtn->setCheckable(true);
         colorToolBtn = new QToolButton(Widget);
         colorToolBtn->setObjectName(QStringLiteral("colorToolBtn"));
         colorToolBtn->setGeometry(QRect(600, 570, 30, 30));

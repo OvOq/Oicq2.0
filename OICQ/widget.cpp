@@ -1,14 +1,18 @@
 #include "widget.h"
 #include "ui_widget.h"
-#include<QUdpSocket>
-#include<QHostInfo>
-#include<QMessageBox>
-#include<QScrollBar>
-#include<QDateTime>
-#include<QNetworkInterface>
-#include<QProcess>
+#include <QUdpSocket>
+#include <QHostInfo>
+#include <QMessageBox>
+#include <QScrollBar>
+#include <QDateTime>
+#include <QNetworkInterface>
+#include <QProcess>
 #include <QFileDialog>
 #include <stdio.h>
+#include <QColorDialog>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -25,6 +29,7 @@ Widget::Widget(QWidget *parent) :
 
     sendMessage(NewParticipant);
     //以上创建了UDP套接字并进行初始化。sendmessage来广播用户登录信息，并且其函数用来发送各种UDP数据
+
 }
 
 //下面对sendmassage进行定义
@@ -191,11 +196,37 @@ void Widget::toolButton()
     }
     else
     {
-        QString fileName = QFileDialog::getSaveFileName(this,
+        // add data base
+        QSqlDatabase database;
+        if(QSqlDatabase::contains("qt_sql_default_connection"))
+        {
+            database = QSqlDatabase::database("qt_sql_default_connection");
+        }
+        else
+        {
+            database = QSqlDatabase::addDatabase("QSQLITE");
+            database.setDatabaseName("MyDataBase.db");
+            database.setUserName("My_Name"); // initial name: My_Name
+            database.setPassword("000000"); // initial password: 000000
+        }
+        // put history into database
+        if(! database.open())
+        {
+            qDebug() << "Error: Failed to connect database." << database.lastError();
+        }
+        else
+        {
+            QString fileName = QFileDialog::getSaveFileName(this,
+            tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
+
+            if(!QString(fileName).isEmpty())
+                saveFile(fileName);
+        }
+        /*QString fileName = QFileDialog::getSaveFileName(this,
         tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
 
         if(!QString (fileName).isEmpty())
-            saveFile(fileName);
+            saveFile(fileName);*/
      }
 }
 
@@ -211,6 +242,54 @@ bool Widget::saveFile(const QString&fileName)
     QTextStream out(&file);
     out<<ui->messageBrowser->toPlainText();
     return true;
+}
+
+//更改字体族
+void Widget::on_fontComboBox_currentFontChanged(const QFont &f)
+{
+    ui->messageTextEdit->setCurrentFont(f);
+    ui->messageTextEdit->setFocus();
+}
+//更改字体大小
+void Widget::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+   ui->messageTextEdit->setFontPointSize(arg1.toDouble());
+   ui->messageTextEdit->setFocus();
+}
+//设置字体加粗、倾斜、下划线和颜色
+
+
+
+//加粗
+void Widget::on_boldToolBtn_clicked(bool checked)
+{
+    if(checked)
+        ui->messageTextEdit->setFontWeight(QFont::Bold);
+    else
+        ui->messageTextEdit->setFontWeight(QFont::Normal);
+    ui->messageTextEdit->setFocus();
+}
+
+//倾斜
+void Widget::on_italicToolBtn_clicked(bool checked)
+{
+    ui->messageTextEdit->setFontItalic(checked);
+    ui->messageTextEdit->setFocus();
+}
+//下划线
+void Widget::on_underlineToolBtn_clicked(bool checked)
+{
+    ui->messageTextEdit->setFontUnderline(checked);
+    ui->messageTextEdit->setFocus();
+}
+//颜色
+void Widget::on_colorToolBtn_clicked()
+{
+    color=QColorDialog::getColor(color,this);
+    if(color.isValid())
+    {
+        ui->messageTextEdit->setTextColor(color);
+        ui->messageTextEdit->setFocus();}
 }
 
 void Widget::send()

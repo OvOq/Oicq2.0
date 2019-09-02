@@ -14,27 +14,36 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_friendwidget
 {
 public:
-    QLabel *label;
+    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout;
+    QTextEdit *textEdit;
 
     void setupUi(QDialog *friendwidget)
     {
         if (friendwidget->objectName().isEmpty())
             friendwidget->setObjectName(QStringLiteral("friendwidget"));
         friendwidget->resize(681, 491);
-        label = new QLabel(friendwidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 10, 661, 461));
-        QFont font;
-        font.setPointSize(30);
-        label->setFont(font);
+        gridLayoutWidget = new QWidget(friendwidget);
+        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
+        gridLayoutWidget->setGeometry(QRect(0, 0, 681, 491));
+        gridLayout = new QGridLayout(gridLayoutWidget);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        textEdit = new QTextEdit(gridLayoutWidget);
+        textEdit->setObjectName(QStringLiteral("textEdit"));
+
+        gridLayout->addWidget(textEdit, 0, 0, 1, 1);
+
 
         retranslateUi(friendwidget);
 
@@ -44,7 +53,6 @@ public:
     void retranslateUi(QDialog *friendwidget)
     {
         friendwidget->setWindowTitle(QApplication::translate("friendwidget", "Dialog", Q_NULLPTR));
-        label->setText(QApplication::translate("friendwidget", "on friends page,waiting to be changed", Q_NULLPTR));
     } // retranslateUi
 
 };

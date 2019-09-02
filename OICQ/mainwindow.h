@@ -11,6 +11,7 @@
 #include <mainpageinstack.h>
 #include "checklogininput.h"
 #include "friendwidget.h"
+#include "ui_friendwidget.h"
 #include "widget.h"
 
 namespace Ui {

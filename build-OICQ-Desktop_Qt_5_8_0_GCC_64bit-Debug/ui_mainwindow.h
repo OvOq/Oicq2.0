@@ -71,7 +71,7 @@ public:
         mainpage->setObjectName(QStringLiteral("mainpage"));
         label = new QLabel(mainpage);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(-4, 6, 1131, 831));
+        label->setGeometry(QRect(-20, 10, 1131, 831));
         QFont font;
         font.setPointSize(50);
         label->setFont(font);
@@ -98,6 +98,7 @@ public:
         toolButton = new QToolButton(centralWidget);
         toolButton->setObjectName(QStringLiteral("toolButton"));
         toolButton->setGeometry(QRect(1254, 1, 19, 19));
+        toolButton->setCursor(QCursor(Qt::PointingHandCursor));
         toolButton->setStyleSheet(QStringLiteral("border-radius:100px;"));
         QIcon icon;
         icon.addFile(QStringLiteral(":/new/prefix1/image/mini.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -105,6 +106,7 @@ public:
         toolButton_2 = new QToolButton(centralWidget);
         toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
         toolButton_2->setGeometry(QRect(1279, 1, 19, 19));
+        toolButton_2->setCursor(QCursor(Qt::PointingHandCursor));
         toolButton_2->setStyleSheet(QStringLiteral("border-radius:100px;"));
         QIcon icon1;
         icon1.addFile(QStringLiteral(":/new/prefix1/image/close.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -112,7 +114,10 @@ public:
         toolButton_3 = new QToolButton(centralWidget);
         toolButton_3->setObjectName(QStringLiteral("toolButton_3"));
         toolButton_3->setGeometry(QRect(1150, 80, 98, 92));
+        toolButton_3->setCursor(QCursor(Qt::OpenHandCursor));
         toolButton_3->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
+"selection-color: rgb(52, 101, 164);\n"
+"selection-background-color: rgb(52, 101, 164);\n"
 "border-radius:10px;"));
         QIcon icon2;
         icon2.addFile(QStringLiteral(":/new/prefix1/image/main.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -123,15 +128,17 @@ public:
         toolButton_4 = new QToolButton(centralWidget);
         toolButton_4->setObjectName(QStringLiteral("toolButton_4"));
         toolButton_4->setGeometry(QRect(1150, 280, 98, 92));
+        toolButton_4->setCursor(QCursor(Qt::OpenHandCursor));
         toolButton_4->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
 "border-radius:10px;"));
         QIcon icon3;
-        icon3.addFile(QStringLiteral(":/new/prefix1/image/friend.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QStringLiteral(":/new/prefix1/image/history.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_4->setIcon(icon3);
         toolButton_4->setIconSize(QSize(95, 89));
         toolButton_5 = new QToolButton(centralWidget);
         toolButton_5->setObjectName(QStringLiteral("toolButton_5"));
         toolButton_5->setGeometry(QRect(1150, 490, 98, 92));
+        toolButton_5->setCursor(QCursor(Qt::OpenHandCursor));
         toolButton_5->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
 "border-radius:10px;"));
         QIcon icon4;
@@ -141,6 +148,7 @@ public:
         toolButton_6 = new QToolButton(centralWidget);
         toolButton_6->setObjectName(QStringLiteral("toolButton_6"));
         toolButton_6->setGeometry(QRect(1150, 700, 98, 92));
+        toolButton_6->setCursor(QCursor(Qt::OpenHandCursor));
         toolButton_6->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
 "border-radius:10px;"));
         QIcon icon5;

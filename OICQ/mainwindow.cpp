@@ -1,5 +1,19 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "stdio.h"
+#include "ui_friendwidget.h"
+#include <QUdpSocket>
+#include <QHostInfo>
+#include <QMessageBox>
+#include <QScrollBar>
+#include <QDateTime>
+#include <QNetworkInterface>
+#include <QProcess>
+#include <QFile>
+#include <QFileDialog>
+#include <QColorDialog>
+#include <QDialog>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent, Qt::WindowTitleHint | Qt::CustomizeWindowHint), // hind the default window button
@@ -9,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->setWindowTitle("Oicq2.0");
     this->setWindowIcon(QIcon(":/new/prefix1/image/icon.ico"));
+
 
     createMenu();
 
@@ -96,7 +111,36 @@ void MainWindow::on_toolButton_3_clicked()
 
 void MainWindow::on_toolButton_4_clicked()
 {
-    ui->StackWidget->setCurrentWidget(friendpage);
+    QString fileName;
+    fileName = QFileDialog::getOpenFileName(this, tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
+
+    if(!fileName.isNull())
+    {
+        QFile file(fileName);
+        if(!file.open(QFile::ReadOnly | QFile::Text))
+        {
+            QMessageBox::warning(this, tr("Error"), tr("read file error:&1").arg(file.errorString()));
+
+            return;
+        }
+        QTextStream in(&file);
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+
+        friendpage = new friendwidget(this);
+        friendpage ->setModal(false);
+
+
+        friendpage->ui->textEdit->setPlainText(in.readAll());
+
+        QApplication::restoreOverrideCursor();
+        friendpage->show();
+        ui->StackWidget->setCurrentWidget(friendpage);
+    }
+    else
+    {
+        qDebug()<<"quit";
+    }
+    //ui->StackWidget->setCurrentWidget(friendpage);
 }
 
 void MainWindow::on_toolButton_5_clicked()
