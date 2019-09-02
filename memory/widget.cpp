@@ -66,7 +66,7 @@ void Widget::on_fontComboBox_currentFontChanged(const QFont &f)
 //更改字体大小
 void Widget::on_comboBox_currentIndexChanged(const QString &arg1)
 {
-   ui->messageTextEdit->setFontPointSize(size.toDouble());
+   ui->messageTextEdit->setFontPointSize(arg1.toDouble());
    ui->messageTextEdit->setFocus();
 }
 //设置字体加粗、倾斜、下划线和颜色
@@ -77,10 +77,10 @@ void Widget::on_comboBox_currentIndexChanged(const QString &arg1)
 void Widget::on_boldToolBtn_clicked(bool checked)
 {
     if(checked)
-        ui->messageTextEdit->setFontWeight(QFont::bold);
+        ui->messageTextEdit->setFontWeight(QFont::Bold);
     else
         ui->messageTextEdit->setFontWeight(QFont::Normal);
-    ui->messageTextEdit->setFocus;
+    ui->messageTextEdit->setFocus();
 }
 
 //倾斜
@@ -103,4 +103,21 @@ void Widget::on_colorToolBtn_clicked()
     {
         ui->messageTextEdit->setTextColor(color);
         ui->messageTextEdit->setFocus();
+}
+}
+//清空聊天记录
+void Widget::on_clearToolBtn_clicked()
+{
+    ui->messageBrowser->clear();
+}
+//退出按钮
+void Widget::on_pushButton_2_clicked()
+{
+    close();
+}
+//关闭事件
+void Widget::closeEvent(QCloseEvent*e)
+{
+    sendMessage(ParticipantLeft);
+    QWidget::closeEvent(e);
 }

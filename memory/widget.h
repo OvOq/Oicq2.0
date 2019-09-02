@@ -24,7 +24,7 @@ protected:
     QString getUserName();
     QString getMessgae();
     bool saveFile(const QString&fileName);
-
+    void closeEvent(QCloseEvent*);
 private:
     Ui::Widget *ui;
     QUdpSocket *udpSocket;
@@ -40,6 +40,8 @@ private  slots:
     void on_italicToolBtn_clicked(bool checked);
     void on_underlineToolBtn_clicked(bool checked);
     void on_colorToolBtn_clicked();
+    void on_clearToolBtn_clicked();
+    void on_pushButton_2_clicked();
 };
 
 #endif // WIDGET_H
