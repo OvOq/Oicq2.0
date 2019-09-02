@@ -138,7 +138,7 @@
     </rect>
    </property>
    <property name="toolTip">
-    <string extracomment="加粗"/>
+    <string notr="true" extracomment="加粗"/>
    </property>
    <property name="styleSheet">
     <string notr="true">#frame{border:1px solid rgb(255, 255, 255)}</string>
@@ -213,6 +213,9 @@
      <width>22</width>
      <height>22</height>
     </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QToolButton" name="colorToolBtn">
