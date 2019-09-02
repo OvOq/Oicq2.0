@@ -25,10 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        widget.cpp
+        widget.cpp \
+    tcpclient.cpp
 
 HEADERS += \
-        widget.h
+        widget.h \
+    tcpclient.h
 
 FORMS += \
-        widget.ui
+        widget.ui \
+    tcpclient.ui

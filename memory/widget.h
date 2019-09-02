@@ -1,6 +1,6 @@
 #ifndef WIDGET_H
 #define WIDGET_H
-
+#include <QTextCharFormat>
 #include <QWidget>
 class QUdpSocket;
 namespace Ui {
