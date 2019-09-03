@@ -26,12 +26,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    checklogininput.cpp
+    checklogininput.cpp \
+    checkregisterinput.cpp
 
 HEADERS += \
         mainwindow.h \
-    checklogininput.h
+    checklogininput.h \
+    checkregisterinput.h
 
 FORMS += \
         mainwindow.ui \
-    checklogininput.ui
+    checklogininput.ui \
+    checkregisterinput.ui
+
+# 数据库
+QT += core sql
+QT += network
