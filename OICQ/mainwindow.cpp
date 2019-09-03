@@ -14,6 +14,8 @@
 #include <QColorDialog>
 #include <QDialog>
 #include <QDebug>
+#include <QTimer>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent, Qt::WindowTitleHint | Qt::CustomizeWindowHint), // hind the default window button
@@ -107,12 +109,21 @@ void MainWindow::condButtonPressed()
 void MainWindow::on_toolButton_3_clicked()
 {
     ui->StackWidget->setCurrentWidget(mainpagewidget);
+    ui->toolButton_3->setDown(true);
+    ui->toolButton_4->setDown(false);
+    ui->toolButton_5->setDown(false);
+    ui->toolButton_4->setDown(false);
 }
 
 void MainWindow::on_toolButton_4_clicked()
 {
+    ui->toolButton_3->setDown(false);
+    ui->toolButton_4->setDown(true);
+    ui->toolButton_5->setDown(false);
+    ui->toolButton_4->setDown(false);
     QString fileName;
-    fileName = QFileDialog::getOpenFileName(this, tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
+    fileName = QFileDialog::getOpenFileName(this, tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
+    //fileName = QFileDialog::getOpenFileName(this, tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
 
     if(!fileName.isNull())
     {
@@ -145,5 +156,9 @@ void MainWindow::on_toolButton_4_clicked()
 
 void MainWindow::on_toolButton_5_clicked()
 {
+    ui->toolButton_3->setDown(false);
+    ui->toolButton_4->setDown(false);
+    ui->toolButton_5->setDown(true);
+    ui->toolButton_4->setDown(false);
     ui->StackWidget->setCurrentWidget(chatpage);
 }

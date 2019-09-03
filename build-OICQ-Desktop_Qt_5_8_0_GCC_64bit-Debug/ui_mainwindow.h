@@ -67,6 +67,7 @@ public:
         StackWidget = new QStackedWidget(gridLayoutWidget);
         StackWidget->setObjectName(QStringLiteral("StackWidget"));
         StackWidget->setStyleSheet(QStringLiteral("background-color: rgb(79,79,79);"));
+        StackWidget->setStyleSheet("QStackedWidget{ border: 2px solid white; border-radius: 10px}");
         mainpage = new QWidget();
         mainpage->setObjectName(QStringLiteral("mainpage"));
         label = new QLabel(mainpage);
@@ -115,46 +116,63 @@ public:
         toolButton_3->setObjectName(QStringLiteral("toolButton_3"));
         toolButton_3->setGeometry(QRect(1150, 80, 98, 92));
         toolButton_3->setCursor(QCursor(Qt::OpenHandCursor));
-        toolButton_3->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
-"selection-color: rgb(52, 101, 164);\n"
-"selection-background-color: rgb(52, 101, 164);\n"
-"border-radius:10px;"));
+        toolButton_3->setStyleSheet(QLatin1String("border-radius:10px;\n"
+""));
+        toolButton_3->setStyleSheet("QToolButton{background-color:rgb(108, 123, 139); border:2px solid white; border-radius: 10px} "
+                                    "QToolButton:hover{ background-color: #a7c1d2; border: 2px solid white; border-radius: 10px}"
+                                    "QToolButton:pressed{ background-color: #a7c1d2; border: 2px solid white; border-radius:10px}");
         QIcon icon2;
         icon2.addFile(QStringLiteral(":/new/prefix1/image/main.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_3->setIcon(icon2);
         toolButton_3->setIconSize(QSize(95, 89));
         toolButton_3->setCheckable(true);
+        toolButton_3->setChecked(true);
         toolButton_3->setAutoExclusive(true);
         toolButton_4 = new QToolButton(centralWidget);
         toolButton_4->setObjectName(QStringLiteral("toolButton_4"));
         toolButton_4->setGeometry(QRect(1150, 280, 98, 92));
         toolButton_4->setCursor(QCursor(Qt::OpenHandCursor));
-        toolButton_4->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
-"border-radius:10px;"));
+        toolButton_4->setStyleSheet(QStringLiteral("border-radius:10px;"));
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/new/prefix1/image/history.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_4->setIcon(icon3);
         toolButton_4->setIconSize(QSize(95, 89));
+        toolButton_4->setCheckable(true);
+        toolButton_4->setChecked(true);
+        toolButton_4->setAutoExclusive(true);
+        toolButton_4->setStyleSheet("QToolButton{background-color:rgb(108, 123, 139); border:2px solid white; border-radius: 10px} "
+                                    "QToolButton:hover{ background-color: #a7c1d2; border: 2px solid white; border-radius: 10px}"
+                                    "QToolButton:pressed{ background-color: #a7c1d2; border: 2px solid white; border-radius:10px}");
         toolButton_5 = new QToolButton(centralWidget);
+        toolButton_5->setCheckable(true);
+        toolButton_5->setChecked(true);
+        toolButton_5->setAutoExclusive(true);
         toolButton_5->setObjectName(QStringLiteral("toolButton_5"));
         toolButton_5->setGeometry(QRect(1150, 490, 98, 92));
         toolButton_5->setCursor(QCursor(Qt::OpenHandCursor));
-        toolButton_5->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
-"border-radius:10px;"));
+        toolButton_5->setStyleSheet(QStringLiteral("border-radius:10px;"));
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/new/prefix1/image/chat.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_5->setIcon(icon4);
         toolButton_5->setIconSize(QSize(95, 89));
+        toolButton_5->setStyleSheet("QToolButton{background-color:rgb(108, 123, 139); border:2px solid white; border-radius: 10px} "
+                                    "QToolButton:hover{ background-color: #a7c1d2; border: 2px solid white; border-radius: 10px}"
+                                    "QToolButton:pressed{ background-color: #a7c1d2; border: 2px solid white; border-radius:10px}");
         toolButton_6 = new QToolButton(centralWidget);
+        toolButton_6->setCheckable(true);
+        toolButton_6->setChecked(true);
+        toolButton_6->setAutoExclusive(true);
         toolButton_6->setObjectName(QStringLiteral("toolButton_6"));
         toolButton_6->setGeometry(QRect(1150, 700, 98, 92));
         toolButton_6->setCursor(QCursor(Qt::OpenHandCursor));
-        toolButton_6->setStyleSheet(QLatin1String("background-color: rgb(108, 123, 139);\n"
-"border-radius:10px;"));
+        toolButton_6->setStyleSheet(QStringLiteral("border-radius:10px;"));
         QIcon icon5;
         icon5.addFile(QStringLiteral(":/new/prefix1/image/out.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_6->setIcon(icon5);
         toolButton_6->setIconSize(QSize(95, 89));
+        toolButton_6->setStyleSheet("QToolButton{background-color:rgb(108, 123, 139); border:2px solid white; border-radius: 10px} "
+                                    "QToolButton:hover{ background-color: #a7c1d2; border: 2px solid white; border-radius: 10px}"
+                                    "QToolButton:pressed{ background-color: #a7c1d2; border: 2px solid white; border-radius:10px}");
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -165,7 +183,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "   Welcome", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "        Welcome to OICQ2.0", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "        friends", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "       chat", Q_NULLPTR));
         toolButton->setText(QString());

@@ -8,6 +8,7 @@
 #include <QListWidget>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QTimer>
 #include <mainpageinstack.h>
 #include "checklogininput.h"
 #include "friendwidget.h"

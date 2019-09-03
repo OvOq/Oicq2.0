@@ -75,7 +75,7 @@
           </font>
          </property>
          <property name="text">
-          <string>   Welcome</string>
+          <string>        Welcome to OICQ2.0</string>
          </property>
         </widget>
        </widget>
@@ -188,10 +188,8 @@
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-selection-color: rgb(52, 101, 164);
-selection-background-color: rgb(52, 101, 164);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;
+</string>
     </property>
     <property name="text">
      <string/>
@@ -226,8 +224,7 @@ border-radius:10px;</string>
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -256,8 +253,7 @@ border-radius:10px;</string>
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -286,8 +282,7 @@ border-radius:10px;</string>
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
