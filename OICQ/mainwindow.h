@@ -25,7 +25,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    ~MainWindow();    
 
 private:
     Ui::MainWindow *ui;
@@ -43,9 +43,6 @@ private:
     friendwidget *friendpage;
     Widget *chatpage;
 
-    // log out and back to login window
-    CheckLoginInput *log_i;
-
 private Q_SLOTS:
     void condButtonPressed();
 
@@ -55,6 +52,8 @@ private slots:
     void on_toolButton_3_clicked();
     void on_toolButton_4_clicked();
     void on_toolButton_5_clicked();
+    // log out and back to login window
+    void reboot();
 };
 
 #endif // MAINWINDOW_H

@@ -16,7 +16,6 @@
 #include <QDebug>
 #include <QTimer>
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent, Qt::WindowTitleHint | Qt::CustomizeWindowHint), // hind the default window button
     ui(new Ui::MainWindow)
@@ -66,7 +65,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::createMenu()
 {
-    restoreWinAction = new QAction("back(&R)", this);
+    restoreWinAction = new QAction("open(&R)", this);
     quitAction = new QAction("quit(&Q)", this);
 
     connect(restoreWinAction, SIGNAL(triggered(bool)), this, SLOT(showNormal()));
@@ -78,6 +77,15 @@ void MainWindow::createMenu()
 
     trayMenu->addSeparator();
     trayMenu->addAction(quitAction);
+}
+
+void MainWindow::reboot()
+{
+    QString program = QApplication::applicationFilePath();
+    QStringList arguments = QApplication::arguments();
+    QString workingDirectory = QDir::currentPath();
+    QProcess::startDetached(program, arguments, workingDirectory);
+    QApplication::exit();
 }
 
 void QWidget::changeEvent(QEvent *e)
@@ -100,9 +108,7 @@ void MainWindow::on_toolButton_clicked()
 
 void MainWindow::condButtonPressed()
 {
-    close();
-    log_i = new CheckLoginInput(this);
-    log_i->show();
+    reboot();
 }
 
 
