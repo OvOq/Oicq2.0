@@ -10,9 +10,10 @@
 #include <QFileDialog>
 #include <stdio.h>
 #include <QColorDialog>
+#include<QHostAddress>
 #include"tcpserver.h"
 #include"tcpclient.h"
-#include<QFileDialog>
+
 #include<QTextCharFormat>
 
 
@@ -25,15 +26,21 @@ Widget::Widget(QWidget *parent) :
     port=45454;
     udpSocket->bind(port,QUdpSocket::ShareAddress|QUdpSocket::ReuseAddressHint);
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));//每当有数据到来时就会触发processPendingDatagrams()这个槽
+    sendMessage(NewParticipant);
+
+    server = new TcpServer(this);
+    connect(server,SIGNAL(sendFileName(QString)),this,SLOT(getFileName(QString)));
+
     connect(this->ui->sendButton,SIGNAL(clicked(bool)),this,SLOT(send()));
+
+
     connect(this->ui->exitButton,SIGNAL(clicked(bool)),this,SLOT(cancel()));
     connect(this->ui->saveToolBtn,SIGNAL(clicked(bool)),this,SLOT(toolButton()));
     connect(this->ui->messageTextEdit,SIGNAL(currentCharFormatChanged(QTextCharFormat)),
             this,SLOT(currentFormatChanged(const QTextCharFormat)));
 
-    server = new TcpServer(this);
-    connect(server,SIGNAL(sendFileName(QString)),this,SLOT(getFileName(QString)));
-    sendMessage(NewParticipant);
+
+
     //以上创建了UDP套接字并进行初始化。sendmessage来广播用户登录信息，并且其函数用来发送各种UDP数据
 }
 
@@ -43,7 +50,7 @@ void Widget::sendMessage(MessageType type,QString serverAddress)
     QByteArray data;
     QDataStream out(&data,QIODevice::WriteOnly);
     QString localHostName =QHostInfo::localHostName();
-    QString address =getIP();
+    QString address =getIP();//
     out<<type<<getUserName()<<localHostName;//写入信息类型，用户名，主机名
 
     switch (type)
@@ -53,9 +60,9 @@ void Widget::sendMessage(MessageType type,QString serverAddress)
                 QMessageBox::warning(0,tr("警告"),tr("发送消息不能为空"),QMessageBox::Ok);
                 return;
             }
-        out<<address<<getMessage();//写入本机Ip和输入的消息文本
-        ui->messageBrowser->verticalScrollBar()->setValue(ui->messageBrowser->verticalScrollBar()->maximum());
-        break;
+            out<<address<<getMessage();//写入本机Ip和输入的消息文本
+            ui->messageBrowser->verticalScrollBar()->setValue(ui->messageBrowser->verticalScrollBar()->maximum());
+            break;
 
         case NewParticipant://新用户加入，则写入IP地址
             out<<address;
@@ -64,18 +71,17 @@ void Widget::sendMessage(MessageType type,QString serverAddress)
         case ParticipantLeft://用户离开，不操作
             break;
 
-    case  FileName:{
-        int row = ui->userTableWidget->currentRow();
-        QString clientAddress = ui->userTableWidget->item(row, 2)->text();
-        out << address << clientAddress << fileName;
+        case  FileName:{
+            int row = ui->userTableWidget->currentRow();
+            QString clientAddress = ui->userTableWidget->item(row, 2)->text();
+            out << address << clientAddress << fileName;
             break;}
 
         case Refuse:
             out<<serverAddress;
             break;
 
-        default:
-            break;
+
     }
     //以上完成了对信息的处理，以下用writeDatagram（）进行广播
     udpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, port);
@@ -134,8 +140,6 @@ void Widget::processPendingDatagrams()
             break;
         }
 
-            default:
-                break;
         }
     }
 
@@ -177,8 +181,8 @@ void Widget::participantLeft(QString userName, QString localHostName, QString ti
 
 QString Widget::getIP()//获取ip地址
 {
-    QList<QHostAddress> List=QNetworkInterface::allAddresses();
-    foreach (QHostAddress address, List){
+    QList<QHostAddress> list=QNetworkInterface::allAddresses();
+    foreach (QHostAddress address, list){
         if(address.protocol()==QAbstractSocket::IPv4Protocol)
             return address.toString();
     }
@@ -211,7 +215,7 @@ QString Widget::getMessage()//获取用户输入的消息
     return msg;
 }
 
-void Widget::toolButton()
+void Widget::toolButton()//save chat
 {
     if(ui->messageBrowser->document()->isEmpty())
     {
@@ -243,15 +247,15 @@ bool Widget::saveFile(const QString&fileName)
 }
 
 //更改字体族
-void Widget::on_fontComboBox_currentFontChanged(const QFont &f)
+void Widget::on_fontComboBox_currentFontChanged(QFont f)
 {
     ui->messageTextEdit->setCurrentFont(f);
     ui->messageTextEdit->setFocus();
 }
 //更改字体大小
-void Widget::on_comboBox_currentIndexChanged(const QString &arg1)
+void Widget::on_comboBox_currentIndexChanged(QString size)
 {
-   ui->messageTextEdit->setFontPointSize(arg1.toDouble());
+   ui->messageTextEdit->setFontPointSize(size.toDouble());
    ui->messageTextEdit->setFocus();
 }
 //设置字体加粗、倾斜、下划线和颜色
@@ -366,7 +370,7 @@ void Widget::hasPendingFile(QString userName, QString serverAddress,
         }
     }
 }
-
+//sendmessage
 void Widget::on_sendToolBtn_clicked()
 {
     if(ui->userTableWidget->selectedItems().isEmpty())

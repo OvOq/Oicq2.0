@@ -353,7 +353,7 @@
    </column>
    <column>
     <property name="text">
-     <string>IP地址</string>
+     <string>上线时间</string>
     </property>
    </column>
   </widget>
