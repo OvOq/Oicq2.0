@@ -55,7 +55,7 @@ void TcpClient::readMessage()
         if((tcpClient->bytesAvailable()>=sizeof(qint64)*2)&&(fileNameSize==0))
         {
             in>>TotalBytes>>fileNameSize;
-            bytesReceived+=sizeof(qint64)*2;
+            bytesReceived += sizeof(qint64)*2;
         }
         if((tcpClient->bytesAvailable()>=fileNameSize)&&(fileNameSize!=0))
         {
@@ -112,7 +112,7 @@ void TcpClient::on_tcpClientCancleBtn_clicked()
         localFile->close();
 
 }
-
+//关闭按钮
 void TcpClient::on_tcpClientCloseBtn_clicked()
 {
     tcpClient->abort();

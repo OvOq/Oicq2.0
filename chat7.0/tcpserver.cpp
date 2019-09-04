@@ -39,20 +39,23 @@ void TcpServer::sendMessage()
 {
     ui->serverSendBtn->setEnabled(false);
     clientConnection = tcpServer->nextPendingConnection();
-    connect(clientConnection,SIGNAL(bytesWritten(qint64)),this,SLOT(updateClientProgress(qint64)));
+    connect(clientConnection,SIGNAL(bytesWritten(qint64)),
+            this,SLOT(updateClientProgress(qint64)));
 
     ui->serverStatusLabel->setText(tr("开始传送文件%1!").arg(theFileName));
 
     localFile =new QFile(fileName);
     if(! localFile->open((QFile::ReadOnly))){
-        QMessageBox::warning(this,tr("应用程序"),tr("无法读取文件%1:\n%2").arg(fileName).arg(localFile->errorString()));
+        QMessageBox::warning(this,tr("应用程序"),tr("无法读取文件%1:\n%2")
+                             .arg(fileName).arg(localFile->errorString()));
         return;
     }
     TotalBytes = localFile->size();
     QDataStream sendOut(&outBlock,QIODevice::WriteOnly);
     sendOut.setVersion(QDataStream::Qt_4_7);
     time.start();//开始计时
-    QString currentFile = fileName.right(fileName.lastIndexOf('/')-1);
+    QString currentFile = fileName.right(fileName.size()
+                                         - fileName.lastIndexOf('/')-1);
     sendOut<<qint64(0)<<qint64(0)<<currentFile;
     TotalBytes +=outBlock.size();
     sendOut.device()->seek(0);
@@ -87,10 +90,11 @@ void TcpServer::updateClientProgress(qint64 numBytes)
                                    .arg(useTime/1000,1,'f',0)
                                    .arg(TotalBytes/speed/1000-useTime/1000,0,'f',0));
 
-    if(bytesWritten==TotalBytes){
+    if(bytesWritten == TotalBytes){
         localFile->close();
         tcpServer->close();
-        ui->serverStatusLabel->setText(tr("传送文件%1成功").arg(theFileName));
+        ui->serverStatusLabel->setText(tr("传送文件%1成功")
+                                       .arg(theFileName));
     }
 }
 
@@ -116,6 +120,8 @@ void TcpServer::on_serverSendBtn_clicked()
         close();
         return;
     }
+    ui->serverStatusLabel->setText(tr("等待对方接收······"));
+    emit sendFileName(theFileName);
 }
 
 //关闭按钮
