@@ -10,7 +10,7 @@ class TcpServer;
 namespace Ui {
 class Widget;
 }
-//枚举消息，新用户加入，用户退出，文件名，拒绝接收文件五种变量标志信息类型
+//????????????????????????????????????
 enum MessageType {Message, NewParticipant, ParticipantLeft, FileName, Refuse};
 
 
@@ -23,11 +23,11 @@ public:
     ~Widget();
 
 protected:
-    //新用户加入时要执行的函数的声明
+    //???????????????
     void newParticipant(QString userName,QString localHostName,QString ipAddress);
-    //用户离开时加入时要执行的函数的声明
+    //?????????????????
     void participantLeft(QString userName,QString localHostName,QString time);
-    //发消息时要执行的函数的声明
+    //?????????????
     void sendMessage(MessageType type, QString serverAddress="");
 
     void hasPendingFile(QString userName, QString serverAddress,
@@ -35,9 +35,9 @@ protected:
 
     //void bewParticipant(QString userName,QString localHostName,QString ipAddress);//*
 
-    QString getIP();//获取IP函数的声明
-    QString getUserName();//获取用户名函数的声明
-    QString getMessage();//获取新消息的函数的声明
+    QString getIP();//??IP?????
+    QString getUserName();//??????????
+    QString getMessage();//???????????
 
     bool saveFile(const QString&fileName);
 
@@ -52,9 +52,9 @@ private:
     TcpServer *server;
 
 private slots:
-    void processPendingDatagrams();//槽函数声明
-    void send();//点击发送的槽函数
-    void cancel();//点击退出的槽函数
+    void processPendingDatagrams();//?????
+    void send();//????????
+    void cancel();//????????
     void toolButton();//savechast
     void on_fontComboBox_currentFontChanged(QFont f);
     void on_boldToolBtn_clicked(bool checked);

@@ -1,15 +1,16 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-08-30T15:07:28
+# Project created by QtCreator 2019-08-29T15:42:30
 #
 #-------------------------------------------------
 
 QT       += core gui
-QT       +=network
+QT       += network
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = chat
+TARGET = OICQ
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -22,24 +23,39 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-#pragma execution_character_set("utf-8")
+
 
 SOURCES += \
         main.cpp \
-        widget.cpp \
+        mainwindow.cpp \
+    checklogininput.cpp \
+    mainpageinstack.cpp \
+    friendwidget.cpp \
+    widget.cpp \
     tcpserver.cpp \
     tcpclient.cpp
 
 HEADERS += \
-        widget.h \
+        mainwindow.h \
+    checklogininput.h \
+    mainpageinstack.h \
+    friendwidget.h \
+    widget.h \
     tcpserver.h \
     tcpclient.h
 
 FORMS += \
-        widget.ui \
+        mainwindow.ui \
+    checklogininput.ui \
+    mainpageinstack.ui \
+    friendwidget.ui \
+    widget.ui \
     tcpserver.ui \
     tcpclient.ui
 
 RESOURCES += \
-    test.qrc \
-    chaticon/test.qrc
+    image.qrc \
+    image_index.qrc \
+    test.qrc
+
+DISTFILES +=
