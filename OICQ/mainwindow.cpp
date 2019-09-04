@@ -49,6 +49,32 @@ MainWindow::MainWindow(QWidget *parent) :
     friendpage = new friendwidget;
     chatpage = new Widget;
 
+    //toolButton stylesheet
+    ui->toolButton_3->setCheckable(true);
+    ui->toolButton_3->setChecked(true);
+    ui->toolButton_3->setAutoExclusive(true);
+    ui->toolButton_3->setStyleSheet("QToolButton{background-color:#86b8e9; outline:none;border:3px solid white; border-radius:3px}"
+                                    "QToolButton:hover{background-color:#a6caf2}"
+                                    "QToolButton:pressed{background-color:#a6caf2}");
+    ui->toolButton_4->setCheckable(true);
+    ui->toolButton_4->setChecked(true);
+    ui->toolButton_4->setAutoExclusive(true);
+    ui->toolButton_4->setStyleSheet("QToolButton{background-color:#86b8e9; outline:none;border:3px solid white; border-radius:3px}"
+                                    "QToolButton:hover{background-color:#a6caf2}"
+                                    "QToolButton:pressed{background-color:#a6caf2}");
+    ui->toolButton_5->setCheckable(true);
+    ui->toolButton_5->setChecked(true);
+    ui->toolButton_5->setAutoExclusive(true);
+    ui->toolButton_5->setStyleSheet("QToolButton{background-color:#86b8e9; outline:none;border:3px solid white; border-radius:3px}"
+                                    "QToolButton:hover{background-color:#a6caf2}"
+                                    "QToolButton:pressed{background-color:#a6caf2}");
+    ui->toolButton_6->setCheckable(true);
+    ui->toolButton_6->setChecked(true);
+    ui->toolButton_6->setAutoExclusive(true);
+    ui->toolButton_6->setStyleSheet("QToolButton{background-color:#86b8e9; outline:none;border:3px solid white; border-radius:3px}"
+                                    "QToolButton:hover{background-color:#a6caf2}"
+                                    "QToolButton:pressed{background-color:#a6caf2}");
+
     ui->StackWidget->addWidget(mainpagewidget);
     ui->StackWidget->addWidget(friendpage);
     ui->StackWidget->addWidget(chatpage);
@@ -128,8 +154,7 @@ void MainWindow::on_toolButton_4_clicked()
     ui->toolButton_5->setDown(false);
     ui->toolButton_4->setDown(false);
     QString fileName;
-    fileName = QFileDialog::getOpenFileName(this, tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
-    //fileName = QFileDialog::getOpenFileName(this, tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
+    fileName = QFileDialog::getOpenFileName(this, tr("保存聊天记录"), tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
 
     if(!fileName.isNull())
     {

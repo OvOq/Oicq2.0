@@ -13,6 +13,8 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QtSql/QSqlTableModel>
+#include <QtNetwork>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -222,11 +224,6 @@ void Widget::toolButton()
             if(!QString(fileName).isEmpty())
                 saveFile(fileName);
         }
-        /*QString fileName = QFileDialog::getSaveFileName(this,
-        tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
-
-        if(!QString (fileName).isEmpty())
-            saveFile(fileName);*/
      }
 }
 

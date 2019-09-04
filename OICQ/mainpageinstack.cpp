@@ -5,6 +5,7 @@
 #include <qtimer.h>
 #include <QTimer>
 #include <QTime>
+
 MainPageinStack::MainPageinStack(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MainPageinStack)
