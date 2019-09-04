@@ -63,8 +63,8 @@
         <widget class="QLabel" name="label">
          <property name="geometry">
           <rect>
-           <x>-4</x>
-           <y>6</y>
+           <x>0</x>
+           <y>10</y>
            <width>1131</width>
            <height>831</height>
           </rect>
@@ -75,7 +75,7 @@
           </font>
          </property>
          <property name="text">
-          <string>   Welcome</string>
+          <string>        Welcome to OICQ2.0</string>
          </property>
         </widget>
        </widget>
@@ -138,6 +138,9 @@
       <height>19</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true">border-radius:100px;</string>
     </property>
@@ -157,6 +160,9 @@
       <width>19</width>
       <height>19</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:100px;</string>
@@ -178,9 +184,12 @@
       <height>92</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;
+</string>
     </property>
     <property name="text">
      <string/>
@@ -211,16 +220,18 @@ border-radius:10px;</string>
       <height>92</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="icon">
-     <iconset resource="image_index.qrc">
-      <normaloff>:/new/prefix1/image/friend.png</normaloff>:/new/prefix1/image/friend.png</iconset>
+     <iconset resource="image.qrc">
+      <normaloff>:/new/prefix1/image/history.png</normaloff>:/new/prefix1/image/history.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -238,9 +249,11 @@ border-radius:10px;</string>
       <height>92</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -265,9 +278,11 @@ border-radius:10px;</string>
       <height>92</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(108, 123, 139);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -288,6 +303,7 @@ border-radius:10px;</string>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="image_index.qrc"/>
+  <include location="image.qrc"/>
  </resources>
  <connections/>
 </ui>

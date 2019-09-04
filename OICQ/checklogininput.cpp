@@ -22,6 +22,7 @@ void CheckLoginInput::on_loginBtn_clicked()
     // 如果错误则弹出警告对话框
     if (ui->usrLineEdit->text().trimmed() == tr("zh") && ui->pwdLineEdit->text() == tr("123456"))//暂时先用zh,123456账号
     {
+        usrname = ui->usrLineEdit->text().trimmed();
         accept();
     }
     else

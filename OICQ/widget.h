@@ -2,6 +2,9 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 class QUdpSocket;
 
 namespace Ui {
@@ -37,12 +40,19 @@ private:
     Ui::Widget *ui;
     QUdpSocket *udpSocket;
     qint16 port;
+    QColor color;
 
 private slots:
     void processPendingDatagrams();//槽函数声明
     void send();//点击发送的槽函数
     void cancel();//点击退出的槽函数
     void toolButton();
+    void on_fontComboBox_currentFontChanged(const QFont &f);
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_boldToolBtn_clicked(bool checked);
+    void on_italicToolBtn_clicked(bool checked);
+    void on_underlineToolBtn_clicked(bool checked);
+    void on_colorToolBtn_clicked();
 };
 
 
