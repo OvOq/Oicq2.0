@@ -116,6 +116,8 @@ void TcpServer::on_serverSendBtn_clicked()
         close();
         return;
     }
+    ui->serverStatusLabel->setText(tr("等待文件传输……"));
+    emit sendFileName(theFileName);
 }
 
 //关闭按钮

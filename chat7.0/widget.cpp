@@ -10,7 +10,6 @@
 #include <QFileDialog>
 #include <stdio.h>
 #include <QColorDialog>
-#include<QHostAddress>
 #include"tcpserver.h"
 #include"tcpclient.h"
 
@@ -27,21 +26,18 @@ Widget::Widget(QWidget *parent) :
     udpSocket->bind(port,QUdpSocket::ShareAddress|QUdpSocket::ReuseAddressHint);
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));//每当有数据到来时就会触发processPendingDatagrams()这个槽
     sendMessage(NewParticipant);
-
     server = new TcpServer(this);
     connect(server,SIGNAL(sendFileName(QString)),this,SLOT(getFileName(QString)));
-
     connect(this->ui->sendButton,SIGNAL(clicked(bool)),this,SLOT(send()));
-
-
     connect(this->ui->exitButton,SIGNAL(clicked(bool)),this,SLOT(cancel()));
     connect(this->ui->saveToolBtn,SIGNAL(clicked(bool)),this,SLOT(toolButton()));
+//更改字体大小
+    connect(this->ui->sizeComboBox,SIGNAL(currentIndexChanged(QString)),
+            this,SLOT(on_sizeComboBox_currentIndexChanged( QString)));
+//同一段文字，不同字体风格
     connect(this->ui->messageTextEdit,SIGNAL(currentCharFormatChanged(QTextCharFormat)),
             this,SLOT(currentFormatChanged(const QTextCharFormat)));
-
-
-
-    //以上创建了UDP套接字并进行初始化。sendmessage来广播用户登录信息，并且其函数用来发送各种UDP数据
+//以上创建了UDP套接字并进行初始化。sendmessage来广播用户登录信息，并且其函数用来发送各种UDP数据
 }
 
 //下面对send message进行定义
@@ -50,7 +46,7 @@ void Widget::sendMessage(MessageType type,QString serverAddress)
     QByteArray data;
     QDataStream out(&data,QIODevice::WriteOnly);
     QString localHostName =QHostInfo::localHostName();
-    QString address =getIP();//
+    QString address =getIP();
     out<<type<<getUserName()<<localHostName;//写入信息类型，用户名，主机名
 
     switch (type)
@@ -111,7 +107,7 @@ void Widget::processPendingDatagrams()
 
             case NewParticipant://如果消息类型是新用户加入的话
                 in>>userName>>localHostName>>ipAddress;//获取用户名，主机名和IP地址信息
-                newParticipant(userName,localHostName,time);//进行新用户登陆的处理
+                newParticipant(userName,localHostName,ipAddress);//进行新用户登陆的处理
                 break;
 
             case ParticipantLeft://若用户退出
@@ -253,10 +249,11 @@ void Widget::on_fontComboBox_currentFontChanged(QFont f)
     ui->messageTextEdit->setFocus();
 }
 //更改字体大小
-void Widget::on_comboBox_currentIndexChanged(QString size)
+
+void Widget::on_sizeComboBox_currentIndexChanged(QString size )
 {
-   ui->messageTextEdit->setFontPointSize(size.toDouble());
-   ui->messageTextEdit->setFocus();
+    ui->messageTextEdit->setFontPointSize(size.toDouble());
+    ui->messageTextEdit->setFocus();
 }
 //设置字体加粗、倾斜、下划线和颜色
 
