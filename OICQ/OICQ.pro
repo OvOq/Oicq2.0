@@ -33,7 +33,8 @@ SOURCES += \
     friendwidget.cpp \
     widget.cpp \
     tcpserver.cpp \
-    tcpclient.cpp
+    tcpclient.cpp \
+    checkregisterinput.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,9 @@ HEADERS += \
     friendwidget.h \
     widget.h \
     tcpserver.h \
-    tcpclient.h
+    tcpclient.h \
+    checkregisterinput.h
+
 
 FORMS += \
         mainwindow.ui \
@@ -51,7 +54,9 @@ FORMS += \
     friendwidget.ui \
     widget.ui \
     tcpserver.ui \
-    tcpclient.ui
+    tcpclient.ui \
+    checkregisterinput.ui
+
 
 RESOURCES += \
     image.qrc \

@@ -17,7 +17,7 @@ TcpServer::TcpServer(QWidget *parent) :
 
     tcpPort = 6666;
     tcpServer = new QTcpServer(this);
-    connect(this->tcpServer,SIGNAL(newConnection()),this,SLOT(sendMessage()));
+    connect(tcpServer,SIGNAL(newConnection()),this,SLOT(sendMessage()));
 
     initServer();//初始服务器
 }
@@ -50,10 +50,9 @@ void TcpServer::sendMessage()
     }
     TotalBytes = localFile->size();
     QDataStream sendOut(&outBlock,QIODevice::WriteOnly);
-    sendOut.setVersion(QDataStream::Qt_5_9);
+    sendOut.setVersion(QDataStream::Qt_4_7);
     time.start();//开始计时
-    QString currentFile = fileName.right(fileName.size()
-                                         -fileName. lastIndexOf('/')-1);
+    QString currentFile = fileName.right(fileName.lastIndexOf('/')-1);
     sendOut<<qint64(0)<<qint64(0)<<currentFile;
     TotalBytes +=outBlock.size();
     sendOut.device()->seek(0);
@@ -84,7 +83,7 @@ void TcpServer::updateClientProgress(qint64 numBytes)
                                       "\n共%3MB已用时：%4秒\n估计剩余时间：%5秒")
                                    .arg(bytesWritten/(1024*1024))
                                    .arg(speed*1000/(1024*1024),0,'f',2)
-                                   .arg(TotalBytes/(1024*1024))
+                                   .arg(TotalBytes/(1024*1025))
                                    .arg(useTime/1000,1,'f',0)
                                    .arg(TotalBytes/speed/1000-useTime/1000,0,'f',0));
 

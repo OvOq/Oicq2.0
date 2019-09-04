@@ -10,7 +10,7 @@ TcpClient::TcpClient(QWidget *parent) :
     ui(new Ui::TcpClient)
 {
     ui->setupUi(this);
-    setFixedSize(700,360);
+    setFixedSize(350,180);
 
     TotalBytes=0;
     bytesReceived=0;
@@ -18,8 +18,8 @@ TcpClient::TcpClient(QWidget *parent) :
     tcpClient=new QTcpSocket(this);
     tcpPort=6666;
 
-    connect(this->tcpClient,SIGNAL(readyRead()),this,SLOT(readMessage()));
-    connect(this->tcpClient,SIGNAL(error(QAbstractSocket::SocketError)),
+    connect(tcpClient,SIGNAL(readyrRead()),this,SLOT(readMessage()));
+    connect(tcpClient,SIGNAL(error(QAbstractSocket::SocketError)),
             this,SLOT(displayError(QAbstractSocket::SocketError)));
 }
 
@@ -46,7 +46,7 @@ void TcpClient::newConnect()
 void TcpClient::readMessage()
 {
     QDataStream in(tcpClient);
-    in.setVersion(QDataStream::Qt_5_9);
+    in.setVersion(QDataStream::Qt_4_7);
 
     float useTime=time.elapsed();
 
@@ -54,7 +54,7 @@ void TcpClient::readMessage()
     {
         if((tcpClient->bytesAvailable()>=sizeof(qint64)*2)&&(fileNameSize==0))
         {
-            in>>TotalBytes>>fileNameSize;//*
+            in>>TotalBytes>>fileNameSize;
             bytesReceived+=sizeof(qint64)*2;
         }
         if((tcpClient->bytesAvailable()>=fileNameSize)&&(fileNameSize!=0))
@@ -96,7 +96,6 @@ void TcpClient::readMessage()
         ui->tcpClientStatusLabel->setText(tr("接收文件%1完毕").arg(fileName));
     }
 }
-
 void TcpClient::displayError(QAbstractSocket::SocketError socketError)
 {
     switch(socketError)

@@ -184,11 +184,7 @@ void Widget::participantLeft(QString userName, QString localHostName, QString ti
     }
     return 0;
 }*/
-/**
- * @brief 检测当前网卡是否是虚拟网卡(VMware/VirtualBox)或回环网卡
- * @param str_card_name  网卡的描述信息
- * @return 如果是虚拟网卡或回环网卡，返回true, 否则返回false
- */
+
 bool is_virtual_network_card_or_loopback(QString str_card_name)
 {
     if (-1 != str_card_name.indexOf("VMware")
@@ -218,11 +214,6 @@ QString Widget::getIP()
         if (inter.flags() & (QNetworkInterface::IsUp | QNetworkInterface::IsRunning))
         {
             entry = inter.addressEntries();
-            // entry.at(0) 是IPv6信息
-            /*if (entry.at(1).ip().protocol() == QAbstractSocket::IPv4Protocol)
-            {
-
-            }*/
             return entry.at(0).ip().toString();
         }
     }
@@ -411,6 +402,7 @@ void Widget::hasPendingFile(QString userName, QString serverAddress,
         }
     }
 }
+//sendmessage
 void Widget::on_sendToolBtn_clicked()
 {
     if(ui->userTableWidget->selectedItems().isEmpty())
@@ -420,7 +412,6 @@ void Widget::on_sendToolBtn_clicked()
         return;
     }
     server->show();
-//sendmessage
     server->initServer();
 }
 
