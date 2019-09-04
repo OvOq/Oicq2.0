@@ -1,6 +1,10 @@
 #include "checklogininput.h"
 #include "ui_checklogininput.h"
+#include "checkregisterinput.h"
+#include "ui_checkregisterinput.h"
+#include <QLineEdit>
 #include <QMessageBox>
+#include <QtSql>
 
 CheckLoginInput::CheckLoginInput(QWidget *parent) :
     QDialog(parent),
@@ -9,6 +13,12 @@ CheckLoginInput::CheckLoginInput(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/new/prefix1/image/icon.ico"));
     this->setWindowTitle("Welcome to Oicq2.0");
+    tcpSocket = new QTcpSocket;
+    QString ip = "192.168.43.215";
+    tcpSocket->connectToHost(ip,8010);
+    connect(tcpSocket,SIGNAL(connected()),SLOT(connect_success()));
+    connect(tcpSocket,SIGNAL(readyRead()),SLOT(onReciveData()));
+
 }
 
 CheckLoginInput::~CheckLoginInput()
@@ -18,20 +28,68 @@ CheckLoginInput::~CheckLoginInput()
 
 void CheckLoginInput::on_loginBtn_clicked()
 {
-    // 判断用户名和密码是否正确
+    // 判断用户名和密码是否正确，
     // 如果错误则弹出警告对话框
-    if (ui->usrLineEdit->text().trimmed() == tr("zh") && ui->pwdLineEdit->text() == tr("123456"))//暂时先用zh,123456账号
+    QString user;
+    QString pwd;
+    user = ui->usrLineEdit->text();//获取用户名
+    pwd = ui->pwdLineEdit->text();//获取密码
+    if(user == "")
+        QMessageBox::warning(this,"","用户名不能为空！");
+    else if(pwd == "")
+        QMessageBox::warning(this,"","密码不能为空！");
+    else
+        {
+            QString check_str = "1," + user + "," + pwd ;
+            QByteArray check = check_str.toLocal8Bit();
+            tcpSocket->write(check);
+        /*QString S =QString("select * from account where user='%1' and pwd='%2' ").arg(user).arg(pwd);
+        QSqlQuery query;
+        query.exec(S);
+        if (query.first())
+        {
+            accept();
+        }
+        else
+        {
+            QMessageBox::warning(NULL,"Error","用户名或密码错误！！！");
+            // 清空内容并定位光标
+            ui->usrLineEdit->clear();
+            ui->pwdLineEdit->clear();
+            ui->usrLineEdit->setFocus();
+        }*/
+    }
+}
+
+
+void CheckLoginInput::on_registerBtn_clicked()
+{
+    CheckRegisterInput reg_window;
+    tcpSocket->close();
+    this->close();
+    reg_window.exec();
+}
+
+void CheckLoginInput::onReciveData()
+{
+    QString flag = tcpSocket->readAll();
+    if(!QString::localeAwareCompare(flag,"F"))
     {
-        usrname = ui->usrLineEdit->text().trimmed();
-        accept();
+        QMessageBox::warning(NULL,"Error","用户名或密码错误！！！");
+        // 清空内容并定位光标
+        ui->usrLineEdit->clear();
+        ui->pwdLineEdit->clear();
+        ui->usrLineEdit->setFocus();
     }
     else
     {
-        QMessageBox::warning(this, tr("Warning"),tr("user name or password error!"),QMessageBox::Yes);
-
-        // 清空内容并定位光标
-               ui->usrLineEdit->clear();
-               ui->pwdLineEdit->clear();
-               ui->usrLineEdit->setFocus();
+        accept();
     }
 }
+
+void CheckLoginInput::connect_success()
+{
+    QMessageBox::information(NULL, "成功", "连接成功！！！", QMessageBox::Yes);
+
+}
+
