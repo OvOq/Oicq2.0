@@ -12,14 +12,6 @@ void TcpClientSocket::dataReceived()
 
     QString msg = this->readAll();
     emit updateClients(msg,msg.length());
-    /*while(bytesAvailable()>0)
-    {
-        int length = bytesAvailable();
-        char buf[1024];
-        read(buf,length);
-        QString msg=buf;
-        emit updateClients(msg,length);
-    }*/
 }
 
 //客户端断开连接

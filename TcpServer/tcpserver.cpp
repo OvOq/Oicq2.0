@@ -57,21 +57,7 @@ void TcpServer::updateServer(QString msg,int length)
     //注册
     else
     {
-       /*QString i = QString("insert into account values('%1','%2');").arg(user).arg(pwd);
-       QString S =QString("select * from account where user='%1' ").arg(user);
-       QSqlQuery query;
-       if(query.exec(S))
-       {
-           result = "R";
-       }
-       else if(query.exec(S)&&query.first())
-       {
-           result = "S";
-       }
-       else
-       {
-           result = "E";
-       }*/
+
         QString i = QString("insert into account values('%1','%2');").arg(user).arg(pwd);
         QString S =QString("select * from account where user='%1' ").arg(user);
         QSqlQuery query;

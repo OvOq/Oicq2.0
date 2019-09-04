@@ -22,18 +22,7 @@ void Server::incomingConnection(int socketDescriptor)
 //返回确认信息并写在服务端面板上
 void Server::updateClients(QString msg,int length)
 {
-
-
     emit updateServer(msg,length);
-
-    /*for(int i=0;i<tcpClientSocketList.count();i++)
-    {
-        QTcpSocket *item = tcpClientSocketList.at(i);
-        if(item->write(msg.toLatin1(),length)!=length)
-        {
-            continue;
-        }
-    }*/
 }
 
 void Server::check_result(QString result)
