@@ -31,24 +31,36 @@ SOURCES += \
     checklogininput.cpp \
     mainpageinstack.cpp \
     friendwidget.cpp \
-    widget.cpp
+    widget.cpp \
+    tcpserver.cpp \
+    tcpclient.cpp \
+    checkregisterinput.cpp
 
 HEADERS += \
         mainwindow.h \
     checklogininput.h \
     mainpageinstack.h \
     friendwidget.h \
-    widget.h
+    widget.h \
+    tcpserver.h \
+    tcpclient.h \
+    checkregisterinput.h
+
 
 FORMS += \
         mainwindow.ui \
     checklogininput.ui \
     mainpageinstack.ui \
     friendwidget.ui \
-    widget.ui
+    widget.ui \
+    tcpserver.ui \
+    tcpclient.ui \
+    checkregisterinput.ui
+
 
 RESOURCES += \
     image.qrc \
-    image_index.qrc
+    image_index.qrc \
+    test.qrc
 
 DISTFILES +=

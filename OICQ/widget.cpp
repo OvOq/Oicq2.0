@@ -1,20 +1,20 @@
 #include "widget.h"
 #include "ui_widget.h"
-#include <QUdpSocket>
-#include <QHostInfo>
-#include <QMessageBox>
-#include <QScrollBar>
-#include <QDateTime>
-#include <QNetworkInterface>
-#include <QProcess>
+#include<QUdpSocket>
+#include<QHostInfo>
+#include<QMessageBox>
+#include<QScrollBar>
+#include<QDateTime>
+#include<QNetworkInterface>
+#include<QProcess>
 #include <QFileDialog>
 #include <stdio.h>
 #include <QColorDialog>
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QtSql/QSqlTableModel>
-#include <QtNetwork>
+#include"tcpserver.h"
+#include"tcpclient.h"
+
+#include<QTextCharFormat>
+
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -25,17 +25,23 @@ Widget::Widget(QWidget *parent) :
     port=45454;
     udpSocket->bind(port,QUdpSocket::ShareAddress|QUdpSocket::ReuseAddressHint);
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));//每当有数据到来时就会触发processPendingDatagrams()这个槽
+    sendMessage(NewParticipant);
+    server = new TcpServer(this);
+    connect(server,SIGNAL(sendFileName(QString)),this,SLOT(getFileName(QString)));
     connect(this->ui->sendButton,SIGNAL(clicked(bool)),this,SLOT(send()));
     connect(this->ui->exitButton,SIGNAL(clicked(bool)),this,SLOT(cancel()));
     connect(this->ui->saveToolBtn,SIGNAL(clicked(bool)),this,SLOT(toolButton()));
-
-    sendMessage(NewParticipant);
-    //以上创建了UDP套接字并进行初始化。sendmessage来广播用户登录信息，并且其函数用来发送各种UDP数据
-
+//更改字体大小
+    connect(this->ui->sizeComboBox,SIGNAL(currentIndexChanged(QString)),
+            this,SLOT(on_sizeComboBox_currentIndexChanged( QString)));
+//同一段文字，不同字体风格
+    connect(this->ui->messageTextEdit,SIGNAL(currentCharFormatChanged(QTextCharFormat)),
+            this,SLOT(currentFormatChanged(const QTextCharFormat)));
+//以上创建了UDP套接字并进行初始化。sendmessage来广播用户登录信息，并且其函数用来发送各种UDP数据
 }
 
-//下面对sendmassage进行定义
-void Widget::sendMessage(MessageType type)
+//下面对send message进行定义
+void Widget::sendMessage(MessageType type,QString serverAddress)
 {
     QByteArray data;
     QDataStream out(&data,QIODevice::WriteOnly);
@@ -50,9 +56,9 @@ void Widget::sendMessage(MessageType type)
                 QMessageBox::warning(0,tr("警告"),tr("发送消息不能为空"),QMessageBox::Ok);
                 return;
             }
-        out<<address<<getMessage();//写入本机Ip和输入的消息文本
-        ui->messageBrowser->verticalScrollBar()->setValue(ui->messageBrowser->verticalScrollBar()->maximum());
-        break;
+            out<<address<<getMessage();//写入本机Ip和输入的消息文本
+            ui->messageBrowser->verticalScrollBar()->setValue(ui->messageBrowser->verticalScrollBar()->maximum());
+            break;
 
         case NewParticipant://新用户加入，则写入IP地址
             out<<address;
@@ -61,14 +67,17 @@ void Widget::sendMessage(MessageType type)
         case ParticipantLeft://用户离开，不操作
             break;
 
-        case  FileName:
-            break;
+        case  FileName:{
+            int row = ui->userTableWidget->currentRow();
+            QString clientAddress = ui->userTableWidget->item(row, 2)->text();
+            out << address << clientAddress << fileName;
+            break;}
 
         case Refuse:
+            out<<serverAddress;
             break;
 
-        default:
-            break;
+
     }
     //以上完成了对信息的处理，以下用writeDatagram（）进行广播
     udpSocket->writeDatagram(data, data.length(), QHostAddress::Broadcast, port);
@@ -98,7 +107,7 @@ void Widget::processPendingDatagrams()
 
             case NewParticipant://如果消息类型是新用户加入的话
                 in>>userName>>localHostName>>ipAddress;//获取用户名，主机名和IP地址信息
-                newParticipant(userName,localHostName,time);//进行新用户登陆的处理
+                newParticipant(userName,localHostName,ipAddress);//进行新用户登陆的处理
                 break;
 
             case ParticipantLeft://若用户退出
@@ -106,14 +115,27 @@ void Widget::processPendingDatagrams()
                 participantLeft(userName,localHostName,time);//进行用户离开的处理
                 break;
 
-            case FileName:
-                break;
+            case FileName:{
+            in >> userName >> localHostName >> ipAddress;
+            QString clientAddress, fileName;
+            in >> clientAddress >> fileName;
+            hasPendingFile(userName, ipAddress, clientAddress, fileName);
+            break;
+        }
 
-            case Refuse:
-                break;
+        case Refuse: {
+            in >> userName >> localHostName;
+            QString serverAddress;
+            in >> serverAddress;
+            QString ipAddress = getIP();
 
-            default:
-                break;
+            if(ipAddress == serverAddress)
+            {
+                server->refused();
+            }
+            break;
+        }
+
         }
     }
 
@@ -155,8 +177,8 @@ void Widget::participantLeft(QString userName, QString localHostName, QString ti
 
 QString Widget::getIP()//获取ip地址
 {
-    QList<QHostAddress> List=QNetworkInterface::allAddresses();
-    foreach (QHostAddress address, List){
+    QList<QHostAddress> list=QNetworkInterface::allAddresses();
+    foreach (QHostAddress address, list){
         if(address.protocol()==QAbstractSocket::IPv4Protocol)
             return address.toString();
     }
@@ -189,7 +211,7 @@ QString Widget::getMessage()//获取用户输入的消息
     return msg;
 }
 
-void Widget::toolButton()
+void Widget::toolButton()//save chat
 {
     if(ui->messageBrowser->document()->isEmpty())
     {
@@ -198,32 +220,11 @@ void Widget::toolButton()
     }
     else
     {
-        // add data base
-        QSqlDatabase database;
-        if(QSqlDatabase::contains("qt_sql_default_connection"))
-        {
-            database = QSqlDatabase::database("qt_sql_default_connection");
-        }
-        else
-        {
-            database = QSqlDatabase::addDatabase("QSQLITE");
-            database.setDatabaseName("MyDataBase.db");
-            database.setUserName("My_Name"); // initial name: My_Name
-            database.setPassword("000000"); // initial password: 000000
-        }
-        // put history into database
-        if(! database.open())
-        {
-            qDebug() << "Error: Failed to connect database." << database.lastError();
-        }
-        else
-        {
-            QString fileName = QFileDialog::getSaveFileName(this,
-            tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
+        QString fileName = QFileDialog::getSaveFileName(this,
+        tr("保存聊天记录"),tr("聊天记录"),tr("文本(*.txt);;All File(*.*)"));
 
-            if(!QString(fileName).isEmpty())
-                saveFile(fileName);
-        }
+        if(!QString (fileName).isEmpty())
+            saveFile(fileName);
      }
 }
 
@@ -242,16 +243,17 @@ bool Widget::saveFile(const QString&fileName)
 }
 
 //更改字体族
-void Widget::on_fontComboBox_currentFontChanged(const QFont &f)
+void Widget::on_fontComboBox_currentFontChanged(QFont f)
 {
     ui->messageTextEdit->setCurrentFont(f);
     ui->messageTextEdit->setFocus();
 }
 //更改字体大小
-void Widget::on_comboBox_currentIndexChanged(const QString &arg1)
+
+void Widget::on_sizeComboBox_currentIndexChanged(QString size )
 {
-   ui->messageTextEdit->setFontPointSize(arg1.toDouble());
-   ui->messageTextEdit->setFocus();
+    ui->messageTextEdit->setFontPointSize(size.toDouble());
+    ui->messageTextEdit->setFocus();
 }
 //设置字体加粗、倾斜、下划线和颜色
 
@@ -289,6 +291,12 @@ void Widget::on_colorToolBtn_clicked()
         ui->messageTextEdit->setFocus();}
 }
 
+//清空聊天记录
+void Widget::on_clearToolBtn_clicked()
+{
+    ui->messageBrowser->clear();
+}
+
 void Widget::send()
 {
     sendMessage(Message);
@@ -297,6 +305,79 @@ void Widget::send()
 void Widget::cancel()
 {
     this->close();
+}
+
+//关闭事件
+void Widget::closeEvent(QCloseEvent*e)
+{
+    sendMessage(ParticipantLeft);
+    QWidget::closeEvent(e);
+}
+
+//多种字体
+void Widget::currentFormatChanged(const QTextCharFormat &format)
+{
+    ui->fontComboBox->setCurrentFont(format.font());
+    if(format.fontPointSize()<9)
+    {
+       ui->sizeComboBox->setCurrentIndex(3);
+    }
+    else
+   {
+        ui->sizeComboBox->setCurrentIndex(ui->sizeComboBox
+            ->findText(QString::number(format.fontPointSize())));
+   }
+   ui->boldToolBtn->setChecked(format.font().bold());
+   ui->italicToolBtn->setChecked(format.font().italic());
+   ui->underlineToolBtn->setChecked(format.font().underline());
+   color=format.foreground().color();
+
+}
+
+// 获取要发送的文件名
+void Widget::getFileName(QString name)
+{
+    fileName = name;
+    sendMessage(FileName);
+}
+
+
+// 是否接收文件
+void Widget::hasPendingFile(QString userName, QString serverAddress,
+                            QString clientAddress, QString fileName)
+{
+    QString ipAddress = getIP();
+    if(ipAddress == clientAddress)
+    {
+        int btn = QMessageBox::information(this,tr("接受文件"),
+                                           tr("来自%1(%2)的文件：%3,是否接收？")
+                                           .arg(userName).arg(serverAddress).arg(fileName),
+                                           QMessageBox::Yes,QMessageBox::No);
+        if (btn == QMessageBox::Yes) {
+            QString name = QFileDialog::getSaveFileName(0,tr("保存文件"),fileName);
+            if(!name.isEmpty())
+            {
+                TcpClient *client = new TcpClient(this);
+                client->setFileName(name);
+                client->setHostAddress(QHostAddress(serverAddress));
+                client->show();
+            }
+        } else {
+            sendMessage(Refuse,serverAddress);
+        }
+    }
+}
+//sendmessage
+void Widget::on_sendToolBtn_clicked()
+{
+    if(ui->userTableWidget->selectedItems().isEmpty())
+    {
+        QMessageBox::warning(0, tr("选择用户"),
+                       tr("请先从用户列表选择要传送的用户！"), QMessageBox::Ok);
+        return;
+    }
+    server->show();
+    server->initServer();
 }
 
 Widget::~Widget()
