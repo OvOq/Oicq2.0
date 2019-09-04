@@ -32,6 +32,7 @@ SOURCES += \
     mainpageinstack.cpp \
     friendwidget.cpp \
     widget.cpp
+    checkregisterinput.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,6 +40,7 @@ HEADERS += \
     mainpageinstack.h \
     friendwidget.h \
     widget.h
+    checkregisterinput.h
 
 FORMS += \
         mainwindow.ui \
@@ -52,3 +54,8 @@ RESOURCES += \
     image_index.qrc
 
 DISTFILES +=
+    checkregisterinput.ui
+
+# 数据库
+QT += core sql
+QT += network

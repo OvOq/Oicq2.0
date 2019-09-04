@@ -1,7 +1,6 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "stdio.h"
-#include "ui_friendwidget.h"
+#include "friendwidget.h"
 #include <QUdpSocket>
 #include <QHostInfo>
 #include <QMessageBox>

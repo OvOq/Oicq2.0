@@ -1,5 +1,4 @@
 #include "mainpageinstack.h"
-#include "ui_mainpageinstack.h"
 #include <qmath.h>
 #include <qpainter.h>
 #include <qtimer.h>

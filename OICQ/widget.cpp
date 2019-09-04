@@ -1,5 +1,4 @@
 #include "widget.h"
-#include "ui_widget.h"
 #include <QUdpSocket>
 #include <QHostInfo>
 #include <QMessageBox>

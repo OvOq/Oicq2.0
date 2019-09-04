@@ -1,6 +1,9 @@
 #ifndef CHECKLOGININPUT_H
 #define CHECKLOGININPUT_H
 #include <QDialog>
+#include "checkregisterinput.h"
+#include <QTcpSocket>
+#include <QMessageBox>
 
 
 namespace Ui {
@@ -18,8 +21,19 @@ public:
 private slots:
     void on_loginBtn_clicked();
 
+    void on_registerBtn_clicked();
+
+    void connect_success();
+
 private:
     Ui::CheckLoginInput *ui;
+    QTcpSocket *tcpSocket;
+private slots:
+    void onReciveData();
+    //void connect();
+
+
 };
+
 
 #endif // CHECKLOGININPUT_H
